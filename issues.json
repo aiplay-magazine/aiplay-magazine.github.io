@@ -1,0 +1,27 @@
+{
+  "issues": [
+    {
+      "number": 1,
+      "id": "01",
+      "title": "Последний диск",
+      "date": "2026-09",
+      "date_label": "Сентябрь 2026",
+      "theme": "Как индустрия выключает диск",
+      "pages": 57,
+      "page_size": [
+        1586,
+        2244
+      ],
+      "cover": "issues/01/cover.webp",
+      "page_url": "issues/01/pages/{nnn}.webp",
+      "reader": "read.html?issue=01",
+      "pdf": {
+        "url": "https://github.com/aiplay-magazine/aiplay-magazine.github.io/releases/download/issue-01/aiplay-01-last-disc.pdf",
+        "name": "aiplay-01-last-disc.pdf",
+        "bytes": 151570227
+      },
+      "published": "2026-10-13"
+    }
+  ],
+  "updated": "2026-10-13T18:26:40.570Z"
+}

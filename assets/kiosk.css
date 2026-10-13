@@ -1,0 +1,178 @@
+/* ИИГРА · киоск. Palette and type from style/brand.md — no new colors. */
+@import url("fonts/fonts.css");
+
+:root {
+  --ink: #14120E;
+  --paper: #F4EFE3;
+  --paper-dim: #E9E1CE;
+  --gold: #B8912F;
+  --gold-bright: #D8B25C;
+  --grey: #6E6759;
+  --line: rgba(20, 18, 14, .25);
+  --desk: #1E1C18;
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-text: "Inter", "Helvetica Neue", sans-serif;
+  --font-mono: "JetBrains Mono", Menlo, monospace;
+  --gutter: 32px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { font-family: var(--font-text); background: var(--paper); color: var(--ink); }
+a { color: inherit; }
+img { display: block; }
+
+/* ---------- Logo (canonical paths from style/brand/logotypes/) ---------- */
+.logo { display: block; height: auto; }
+.logo g, .logo path, .logo rect { fill: none; stroke-linecap: butt; stroke-linejoin: miter; }
+.logo--iigra .logo-ai { stroke: var(--gold); stroke-width: 16.5; }
+.logo--iigra .logo-ink { stroke: var(--ink); stroke-width: 17; }
+.logo--aiplay .logo-ai { stroke: var(--gold); stroke-width: 17; }
+.logo--aiplay .logo-ai-fill { fill: var(--gold); }
+.logo--aiplay .logo-ink { stroke: var(--ink); stroke-width: 17; }
+.on-dark .logo--iigra .logo-ai, .on-dark .logo--aiplay .logo-ai { stroke: var(--gold-bright); }
+.on-dark .logo--aiplay .logo-ai-fill { fill: var(--gold-bright); }
+.on-dark .logo--iigra .logo-ink, .on-dark .logo--aiplay .logo-ink { stroke: var(--paper); }
+
+/* ---------- Shared bits ---------- */
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 var(--gutter); }
+.mono { font-family: var(--font-mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; }
+.ver { font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; color: var(--grey); }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: 40px; padding: 0 16px;
+  font: 600 13px/1 var(--font-text); letter-spacing: .02em; text-decoration: none;
+  border: 1.5px solid var(--ink); border-radius: 0; cursor: pointer;
+  background: transparent; color: var(--ink); white-space: nowrap;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.btn--solid { background: var(--ink); color: var(--paper); }
+.btn:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+.btn small { font: 400 11px/1 var(--font-mono); letter-spacing: .06em; opacity: .75; }
+.btn:focus-visible, .cover-link:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+/* ---------- Shelf page ---------- */
+.strap {
+  display: flex; justify-content: space-between; gap: 16px;
+  padding: 14px 0; border-bottom: 1px solid var(--ink); color: var(--gold);
+}
+.masthead { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; padding: 48px 0 40px; }
+.masthead .logo { width: clamp(220px, 34vw, 420px); }
+.masthead-copy { max-width: 360px; text-align: right; }
+.tagline { font: italic 400 22px/1.3 var(--font-display); }
+.lede { margin-top: 10px; font-size: 14px; line-height: 1.55; color: var(--grey); }
+
+.rubric {
+  display: flex; align-items: center; gap: 16px; color: var(--gold);
+  margin-bottom: 36px;
+}
+.rubric::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+
+/* The shelf: covers stand on an ink ledge that runs the full width of every row. */
+.shelf {
+  --cover-w: 260px;
+  --cover-h: calc(var(--cover-w) * var(--page-ratio, 1.4142)); /* h/w, set from issues.json */
+  --ledge: 14px;
+  --cap-h: 212px;
+  --row-h: calc(var(--cover-h) + var(--ledge) + var(--cap-h));
+  display: grid;
+  grid-template-columns: repeat(auto-fill, var(--cover-w));
+  grid-auto-rows: var(--row-h);
+  column-gap: 56px;
+  background:
+    linear-gradient(to bottom,
+      transparent var(--cover-h),
+      var(--ink) var(--cover-h),
+      var(--ink) calc(var(--cover-h) + var(--ledge)),
+      rgba(20, 18, 14, .14) calc(var(--cover-h) + var(--ledge)),
+      transparent calc(var(--cover-h) + var(--ledge) + 18px)) 0 0 / 100% var(--row-h) repeat-y;
+  margin: 0 calc(-1 * var(--gutter));
+  padding: 0 var(--gutter);
+}
+.issue { display: flex; flex-direction: column; min-width: 0; }
+.cover-link {
+  position: relative; display: block; height: var(--cover-h);
+  box-shadow: 0 2px 3px rgba(20, 18, 14, .25), 0 18px 32px -14px rgba(20, 18, 14, .55);
+  transform-origin: 50% 100%; transition: transform .25s ease, box-shadow .25s ease;
+}
+.cover-link:hover { transform: translateY(-6px) rotate(-1deg); box-shadow: 0 2px 3px rgba(20, 18, 14, .25), 0 28px 40px -16px rgba(20, 18, 14, .6); }
+.cover-link img { width: 100%; height: 100%; object-fit: cover; background: var(--desk); }
+.badge {
+  position: absolute; top: 14px; left: -6px; padding: 5px 10px 5px 12px;
+  background: var(--gold); color: var(--ink);
+  font: 700 10px/1 var(--font-mono); letter-spacing: .16em;
+}
+.caption { height: var(--cap-h); padding-top: calc(var(--ledge) + 22px); display: flex; flex-direction: column; }
+.caption .mono { color: var(--gold); }
+.issue-title {
+  margin-top: 8px; font: 900 26px/1.1 var(--font-display);
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.issue-theme { margin-top: 6px; font-size: 13px; line-height: 1.45; color: var(--grey);
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.issue-meta { margin-top: 10px; color: var(--grey); font-size: 10px; }
+.issue-actions { margin-top: auto; display: flex; gap: 8px; }
+.issue-actions .btn { flex: 1; padding: 0 10px; }
+
+.footer { margin-top: 72px; border-top: 1px solid var(--ink); padding: 28px 0 40px; }
+.footer-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; }
+.footer .logo { width: 112px; flex: none; }
+.disclaimer { max-width: 620px; font-size: 12px; line-height: 1.55; color: var(--grey); }
+.footer .ver { margin-top: 18px; }
+
+.empty { padding: 48px 0; color: var(--grey); }
+
+@media (max-width: 760px) {
+  :root { --gutter: 16px; }
+  .masthead { flex-direction: column; align-items: flex-start; padding: 32px 0 28px; gap: 20px; }
+  .masthead .logo { width: min(300px, 78vw); }
+  .masthead-copy { text-align: left; }
+  .tagline { font-size: 19px; }
+  .strap .hide-sm { display: none; }
+  .shelf { --cover-w: min(300px, calc(100vw - 2 * var(--gutter))); justify-content: center; }
+  .footer-row { flex-direction: column; align-items: flex-start; }
+}
+
+/* ---------- Reader page ---------- */
+.reader { background: var(--desk); color: var(--paper); height: 100vh; height: 100dvh; overflow: hidden;
+  display: grid; grid-template-rows: 56px minmax(0, 1fr) 56px; grid-template-columns: minmax(0, 1fr); }
+.bar { display: flex; align-items: center; gap: 16px; padding: 0 20px; }
+.bar--top { border-bottom: 1px solid rgba(244, 239, 227, .12); }
+.bar--bottom { border-top: 1px solid rgba(244, 239, 227, .12); justify-content: center; }
+.home { display: flex; align-items: center; gap: 12px; text-decoration: none; flex: none; }
+.home .logo { width: 76px; }
+.home-back { color: var(--gold-bright); }
+.bar-title { flex: 1; min-width: 0; text-align: center; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.bar-title b { font: 700 16px var(--font-display); letter-spacing: 0; text-transform: none; margin-left: 8px; color: var(--paper); }
+.bar-title .mono { color: var(--gold-bright); }
+.reader .btn { border-color: rgba(244, 239, 227, .55); color: var(--paper); height: 36px; }
+.reader .btn:hover { background: var(--gold-bright); border-color: var(--gold-bright); color: var(--ink); }
+.counter { min-width: 92px; text-align: center; color: var(--paper); font-size: 12px; }
+.nav-btn { width: 36px; padding: 0; font-size: 18px; }
+.nav-btn:disabled { opacity: .3; cursor: default; background: transparent; color: var(--paper); border-color: rgba(244, 239, 227, .55); }
+.scrub { width: min(520px, 50vw); accent-color: var(--gold-bright); }
+
+.stage { position: relative; display: flex; align-items: center; justify-content: center; min-width: 0; min-height: 0; overflow: hidden; padding: 20px; }
+.book { flex: none; }
+.book .pg { background: var(--paper); overflow: hidden; }
+.book .pg img { width: 100%; height: 100%; object-fit: fill; }
+.book .pg .ph {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font: 400 11px var(--font-mono); letter-spacing: .16em; color: var(--grey); background: var(--paper-dim);
+}
+.book .pg.is-loaded .ph { display: none; }
+.book .pg--blank { background: var(--paper); }
+.reader .ver { position: absolute; right: 20px; bottom: 6px; color: rgba(244, 239, 227, .35); }
+
+@media (max-width: 760px) {
+  .reader { grid-template-rows: 52px minmax(0, 1fr) 52px; }
+  .bar { padding: 0 12px; gap: 10px; }
+  .home .logo { width: 60px; }
+  .home-back, .bar-title, .btn .lbl { display: none; }
+  .bar--top { justify-content: space-between; }
+  .stage { padding: 12px; }
+  .scrub { width: auto; flex: 1; }
+}
+/* autoSize is off: the wrapper takes the book's explicit size instead of a padding ratio. */
+.book .stf__wrapper { height: 100%; }

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ИИГРА — листать номер</title>
+  <meta name="theme-color" content="#1E1C18">
+  <link rel="stylesheet" href="assets/kiosk.css">
+</head>
+<body class="reader on-dark">
+  <header class="bar bar--top">
+    <a class="home" href="./" aria-label="Назад в киоск">
+      <svg class="logo logo--iigra" viewBox="0.25 -8.25 395.5 116.5" role="img" aria-label="ИИГРА">
+        <g class="logo-ai">
+          <path d="M8.5 0 V70 A27.5 21.8 0 0 0 63.5 70 M63.5 0 V100"/>
+          <path d="M89.5 0 V70 A27.5 21.8 0 0 0 144.5 70 M144.5 0 V100"/>
+        </g>
+        <g class="logo-ink">
+          <path d="M170.75 100 V8.5 H233.75"/>
+          <path d="M251.75 0 V100"/>
+          <path d="M260.25 8.75 A46 28.25 0 0 1 260.25 65.25"/>
+          <path d="M332.75 100 V30 A27.25 21.8 0 0 1 387.25 30 V100"/>
+          <path d="M324.5 56 H360"/>
+        </g>
+      </svg>
+      <span class="home-back mono">← Киоск</span>
+    </a>
+    <div class="bar-title"><span class="mono" id="issue-label"></span><b id="issue-title"></b></div>
+    <span class="counter mono" id="counter"></span>
+    <a class="btn" id="pdf" href="#" download><span class="lbl">Скачать</span> PDF <small id="pdf-size"></small></a>
+  </header>
+
+  <main class="stage" id="stage">
+    <div class="book" id="book"></div>
+    <span class="ver">киоск v0.1</span>
+  </main>
+
+  <footer class="bar bar--bottom">
+    <button class="btn nav-btn" id="prev" aria-label="Предыдущая страница">‹</button>
+    <input class="scrub" id="scrub" type="range" min="1" value="1" aria-label="Перейти к полосе">
+    <button class="btn nav-btn" id="next" aria-label="Следующая страница">›</button>
+  </footer>
+
+  <script src="vendor/page-flip/page-flip.browser.js"></script>
+  <script src="assets/reader.js"></script>
+</body>
+</html>
