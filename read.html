@@ -26,19 +26,32 @@
       <span class="home-back mono">← Киоск</span>
     </a>
     <div class="bar-title"><span class="mono" id="issue-label"></span><b id="issue-title"></b></div>
+    <div class="view-switch" role="group" aria-label="Режим чтения">
+      <button class="btn view-btn" id="view-book" aria-pressed="true" title="Листать как журнал">
+        <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M1.5 3.5h5a2.5 2.5 0 0 1 2.5 2.5v9a2 2 0 0 0-2-2H1.5z M16.5 3.5h-5A2.5 2.5 0 0 0 9 6v9a2 2 0 0 1 2-2h5.5z"/></svg>
+        <span class="lbl">Книга</span>
+      </button>
+      <button class="btn view-btn" id="view-scroll" aria-pressed="false" title="Читать лентой сверху вниз">
+        <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4.5 1.5h9v6.5h-9z M4.5 10h9v6.5h-9z"/></svg>
+        <span class="lbl">Лента</span>
+      </button>
+    </div>
     <span class="counter mono" id="counter"></span>
     <a class="btn" id="pdf" href="#" download><span class="lbl">Скачать</span> PDF <small id="pdf-size"></small></a>
   </header>
 
   <main class="stage" id="stage">
     <div class="book" id="book"></div>
-    <span class="ver">киоск v0.2</span>
+    <span class="ver">киоск v0.4</span>
   </main>
 
   <footer class="bar bar--bottom">
     <button class="btn nav-btn" id="prev" aria-label="Предыдущая страница">‹</button>
     <input class="scrub" id="scrub" type="range" min="1" value="1" aria-label="Перейти к полосе">
     <button class="btn nav-btn" id="next" aria-label="Следующая страница">›</button>
+    <span class="bar-sep" aria-hidden="true"></span>
+    <button class="btn nav-btn" id="zoom-out" aria-label="Уменьшить">−</button>
+    <button class="btn nav-btn" id="zoom-in" aria-label="Увеличить">+</button>
   </footer>
 
   <script src="vendor/page-flip/page-flip.browser.js"></script>

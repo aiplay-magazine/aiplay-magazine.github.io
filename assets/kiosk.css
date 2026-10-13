@@ -48,7 +48,6 @@ img { display: block; }
   transition: background .15s, color .15s, border-color .15s;
 }
 .btn--solid { background: var(--ink); color: var(--paper); }
-.btn:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
 .btn small { font: 400 11px/1 var(--font-mono); letter-spacing: .06em; opacity: .75; }
 .btn:focus-visible, .cover-link:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 
@@ -96,7 +95,6 @@ img { display: block; }
   box-shadow: 0 2px 3px rgba(20, 18, 14, .25), 0 18px 32px -14px rgba(20, 18, 14, .55);
   transform-origin: 50% 100%; transition: transform .25s ease, box-shadow .25s ease;
 }
-.cover-link:hover { transform: translateY(-6px) rotate(-1deg); box-shadow: 0 2px 3px rgba(20, 18, 14, .25), 0 28px 40px -16px rgba(20, 18, 14, .6); }
 .cover-link img { width: 100%; height: 100%; object-fit: cover; background: var(--desk); }
 .badge {
   position: absolute; top: 14px; left: -6px; padding: 5px 10px 5px 12px;
@@ -121,7 +119,6 @@ img { display: block; }
 .disclaimer { max-width: 620px; font-size: 12px; line-height: 1.55; color: var(--grey); }
 .footer .ver { margin-top: 18px; }
 .ver a { color: var(--gold); text-decoration: underline 1px; text-underline-offset: 3px; padding: 8px 0; } /* padding: bigger tap target, no layout shift */
-.ver a:hover { color: var(--ink); }
 
 .empty { padding: 48px 0; color: var(--grey); }
 
@@ -149,10 +146,9 @@ img { display: block; }
 .bar-title b { font: 700 16px var(--font-display); letter-spacing: 0; text-transform: none; margin-left: 8px; color: var(--paper); }
 .bar-title .mono { color: var(--gold-bright); }
 .reader .btn { border-color: rgba(244, 239, 227, .55); color: var(--paper); height: 36px; }
-.reader .btn:hover { background: var(--gold-bright); border-color: var(--gold-bright); color: var(--ink); }
 .counter { min-width: 92px; text-align: center; color: var(--paper); font-size: 12px; }
 .nav-btn { width: 36px; padding: 0; font-size: 18px; }
-.nav-btn:disabled { opacity: .3; cursor: default; background: transparent; color: var(--paper); border-color: rgba(244, 239, 227, .55); }
+.reader .btn:disabled { opacity: .3; cursor: default; background: transparent; color: var(--paper); border-color: rgba(244, 239, 227, .55); }
 .scrub { width: min(520px, 50vw); accent-color: var(--gold-bright); }
 
 .stage { position: relative; display: flex; align-items: center; justify-content: center; min-width: 0; min-height: 0; overflow: hidden; padding: 20px; }
@@ -165,7 +161,33 @@ img { display: block; }
 }
 .book .pg.is-loaded .ph { display: none; }
 .book .pg--blank { background: var(--paper); }
-.reader .ver { position: absolute; right: 20px; bottom: 6px; color: rgba(244, 239, 227, .35); }
+/* Reading mode switch (top bar): book / scroll. */
+.view-switch { display: flex; flex: none; }
+.reader .view-btn { gap: 6px; padding: 0 10px; }
+.reader .view-btn + .view-btn { border-left-width: 0; }
+.view-btn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linejoin: round; }
+.reader .view-btn[aria-pressed="true"] { background: var(--gold-bright); border-color: var(--gold-bright); color: var(--ink); }
+
+/* Scroll view: every page in one column, scrolled natively; width set by reader.js (+/− zoom). */
+.scroll { position: absolute; inset: 0; overflow: auto; overscroll-behavior: contain; padding: 20px 0 32px; outline: none; }
+.scroll-col { margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+.sp { position: relative; flex: none; aspect-ratio: var(--page-ar); background: var(--paper-dim); }
+.sp img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.sp .ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font: 400 11px var(--font-mono); letter-spacing: .16em; color: var(--grey); }
+.sp.is-loaded .ph { display: none; }
+
+.bar-sep { width: 1px; height: 24px; background: rgba(244, 239, 227, .2); }
+
+/* Zoom layer over the stage (reader.js): the visible page(s) at full resolution, panned and scaled. */
+.zoom { position: absolute; inset: 0; z-index: 5; overflow: hidden; background: var(--desk);
+  touch-action: none; cursor: grab; user-select: none; -webkit-user-select: none; }
+.zoom.is-dragging { cursor: grabbing; }
+.zoom-sheet { position: absolute; left: 0; top: 0; display: flex; transform-origin: 0 0; background: var(--paper); }
+.zoom-sheet img { flex: 1 1 0; min-width: 0; height: 100%; -webkit-user-drag: none; }
+.reader .zoom-close { position: absolute; top: 12px; right: 12px; width: 36px; padding: 0; font-size: 20px;
+  background: rgba(30, 28, 24, .85); }
+.reader .ver { z-index: 6; pointer-events: none; position: absolute; right: 20px; bottom: 6px; color: rgba(244, 239, 227, .35); }
 
 @media (max-width: 760px) {
   .reader { grid-template-rows: 52px minmax(0, 1fr) 52px; }
@@ -175,6 +197,18 @@ img { display: block; }
   .bar--top { justify-content: space-between; }
   .stage { padding: 12px; }
   .scrub { width: auto; flex: 1; }
+  .counter { min-width: 0; }
+  .reader .view-btn { padding: 0 9px; }
+  .scroll { padding: 12px 0 24px; }
+  .scroll-col { gap: 12px; }
 }
 /* autoSize is off: the wrapper takes the book's explicit size instead of a padding ratio. */
 .book .stf__wrapper { height: 100%; }
+
+/* Hover only where a pointer really hovers: on touch screens :hover sticks after a tap. */
+@media (hover: hover) {
+  .btn:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+  .cover-link:hover { transform: translateY(-6px) rotate(-1deg); box-shadow: 0 2px 3px rgba(20, 18, 14, .25), 0 28px 40px -16px rgba(20, 18, 14, .6); }
+  .ver a:hover { color: var(--ink); }
+  .reader .btn:hover:not(:disabled) { background: var(--gold-bright); border-color: var(--gold-bright); color: var(--ink); }
+}
