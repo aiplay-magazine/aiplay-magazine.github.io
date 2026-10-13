@@ -120,6 +120,8 @@ img { display: block; }
 .footer .logo { width: 112px; flex: none; }
 .disclaimer { max-width: 620px; font-size: 12px; line-height: 1.55; color: var(--grey); }
 .footer .ver { margin-top: 18px; }
+.ver a { color: var(--gold); text-decoration: underline 1px; text-underline-offset: 3px; padding: 8px 0; } /* padding: bigger tap target, no layout shift */
+.ver a:hover { color: var(--ink); }
 
 .empty { padding: 48px 0; color: var(--grey); }
 
