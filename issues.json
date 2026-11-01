@@ -37,15 +37,15 @@
       ],
       "cover": "issues/01/cover.webp",
       "page_url": "issues/01/pages/{nnn}.webp",
-      "rev": "1c158fe0c57e",
+      "rev": "07c58d64939a",
       "reader": "read.html?issue=01",
       "pdf": {
         "url": "https://github.com/aiplay-magazine/aiplay-magazine.github.io/releases/download/issue-01/aiplay-01-last-disc.pdf",
         "name": "aiplay-01-last-disc.pdf",
-        "bytes": 151570825
+        "bytes": 151575643
       },
       "published": "2026-10-13"
     }
   ],
-  "updated": "2026-11-01T17:19:36.343Z"
+  "updated": "2026-11-01T17:32:03.107Z"
 }
