@@ -14,12 +14,12 @@
       ],
       "cover": "issues/02/cover.webp",
       "page_url": "issues/02/pages/{nnn}.webp",
-      "rev": "2e63a3b8d6d9",
+      "rev": "1317f47c0b3f",
       "reader": "read.html?issue=02",
       "pdf": {
         "url": "https://github.com/aiplay-magazine/aiplay-magazine.github.io/releases/download/issue-02/aiplay-02-kanun.pdf",
         "name": "aiplay-02-kanun.pdf",
-        "bytes": 233973904
+        "bytes": 233967288
       },
       "published": "2026-11-01"
     },
@@ -47,5 +47,5 @@
       "published": "2026-10-13"
     }
   ],
-  "updated": "2026-11-01T17:54:30.986Z"
+  "updated": "2026-11-01T17:55:17.450Z"
 }
