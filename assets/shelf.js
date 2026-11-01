@@ -25,7 +25,7 @@
   shelf.innerHTML = issues.map((it, i) => `
     <article class="issue">
       <a class="cover-link" href="${esc(it.reader)}" aria-label="Листать выпуск ${esc(it.id)}">
-        <img src="${esc(it.cover)}" width="720" height="${Math.round(720 * it.page_size[1] / it.page_size[0])}"
+        <img src="${esc(it.cover)}${it.rev ? "?v=" + encodeURIComponent(it.rev) : ""}" width="720" height="${Math.round(720 * it.page_size[1] / it.page_size[0])}"
              alt="Обложка выпуска ${esc(it.id)} «${esc(it.title)}»" ${i > 3 ? 'loading="lazy"' : ""}>
         ${i === 0 ? '<span class="badge">НОВЫЙ</span>' : ""}
       </a>

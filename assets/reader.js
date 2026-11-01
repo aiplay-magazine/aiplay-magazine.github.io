@@ -21,7 +21,8 @@
   const N = issue.pages;
   const ratio = issue.page_size[0] / issue.page_size[1];
   const pad3 = (p) => String(p).padStart(3, "0");
-  const pageUrl = (p) => issue.page_url.replace("{nnn}", pad3(p));
+  const rev = issue.rev ? "?v=" + encodeURIComponent(issue.rev) : "";
+  const pageUrl = (p) => issue.page_url.replace("{nnn}", pad3(p)) + rev;
   const clampPage = (p) => Math.min(Math.max(Math.round(p) || 1, 1), N);
 
   document.title = `ИИГРА · Выпуск ${issue.id} — ${issue.title}`;
