@@ -17,7 +17,7 @@
     return;
   }
   if (!issues.length) {
-    shelf.outerHTML = `<p class="empty">Первый номер скоро появится на полке.</p>`;
+    shelf.outerHTML = `<p class="empty">Первый номер скоро появится на витрине.</p>`;
     return;
   }
 
